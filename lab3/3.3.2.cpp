@@ -7,46 +7,40 @@ int factorial(int x)
 {
     int res = 1;
     for (int i = 1; i < x; ++i)
-        res *= i+1;
-    
+        res *= i + 1;
+
     return res;
-}
-
-int calculate_S(int a, int b, int n, int h)
-{
-    for (int x = a; x < b; x += h)
-    {
-        for (int k = 0; k < n; k++)
-        {
-            return (pow(x, 2 * k)) / factorial(2 * k);
-        }
-    }
-}
-
-int calculate_Y(int a, int b, int h)
-{
-    for (int x = a; x < b; x += h)
-    {
-        return (exp(x) + exp(-x)) / 2;
-    }
 }
 
 int main()
 {
-    int a = 1;
-    int b = 100;
-    int n = 1000;
-    int h = 2;
+    int a;
+    int b;
+    int n;
+    int h;
+    cout << "Enter value for a: ";
+    cin >> a;
+    cout << "Enter value for b: ";
+    cin >> b;
+    cout << "Enter value for n: ";
+    cin >> n;
+    cout << "Enter value for h: ";
+    cin >> h;
+
     int s;
     int y;
+    int k = 0;
 
-    for (int i = 0; i < n; i++)
+    while (k < n, k++)
     {
-        s = calculate_S(a, b, n, h);
-        y = calculate_Y(a, b, h);
+        for (int x = a; x < b; x += h)
+        {
+            s = (pow(x, 2 * k)) / factorial(2 * k);
+            y = (exp(x) + exp(-x)) / 2;
 
-        cout << s << endl;
-        cout << y << endl;
-        cout << abs(y - s) << endl;
+            cout << "S = " << s
+                 << "Y = " << y
+                 << "|Y-S| = " << abs(y - s) << endl;
+        }
     }
 }
