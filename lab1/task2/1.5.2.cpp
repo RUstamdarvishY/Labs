@@ -18,11 +18,17 @@ int main()
     double a;
     cout << "Enter value for a: ";
     cin >> a;
-    if (!(cin) || a <= 0)
+    while (true)
     {
-        cout << "value must be number and greater than zero" << endl;
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max());
+        if (cin.fail() || a <= 0)
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "value must be number and greater than zero, enter new value: " << endl;
+            cin >> a;
+        }
+        else
+            break;
     }
 
     cout << calculate_z1(a) << endl;
