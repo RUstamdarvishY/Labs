@@ -3,14 +3,6 @@
 
 using namespace std;
 
-int factorial(int x)
-{
-    int res = 1;
-    for (int i = 1; i < x; ++i)
-        res *= i + 1;
-
-    return res;
-}
 
 int main()
 {
@@ -29,14 +21,16 @@ int main()
 
     int s;
     int y;
+    int factorial = 1;
     int k = 0;
 
     while (k < n, k++)
     {
         for (int x = a; x < b; x += h)
         {
-            s = (pow(x, 2 * k)) / factorial(2 * k);
+            s = (pow(x, 2 * k)) / factorial * (2 * k);
             y = (exp(x) + exp(-x)) / 2;
+            factorial *= -1; 
 
             cout << "S = " << s
                  << "Y = " << y
