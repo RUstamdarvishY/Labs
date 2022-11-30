@@ -5,10 +5,11 @@ using namespace std;
 int main()
 {
     int n;
-    int matrix[n][n];
-
-    cout << "Ведите размер матрицы: ";
+    cout << "Введите размер матрицы: ";
     cin >> n;
+
+    int matrix[n][n];
+    bool sim = true;
 
     for (int i = 0; i < n; i++)
     {
@@ -18,7 +19,16 @@ int main()
             cin >> matrix[i][j];
         }
     }
-    bool sim = true;
+    for (int i = 0; i < n; i++)
+    {
+        cout << "\n";
+        for (int j = 0; j < n; j++)
+        {
+            cout << matrix[i][j] << " ";
+        }
+    }  
+    cout << "\n";  
+    
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < n - 1 - i; j++)
