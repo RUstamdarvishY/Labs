@@ -22,7 +22,7 @@ auto calculate_s(double a, double b, double h, int n)
         {
             res += (pow(i, 2 * k)) / factorial(2 * k);
         }
-        cout << "S= " << res << endl;
+        cout << "S = " << res << endl;
         results_array.push_back(res);
     }
     return results_array;
@@ -36,7 +36,7 @@ auto calculate_y(double a, double b, double h)
         double res;
         res = (exp(i) + exp(-i)) / 2;
         results_array.push_back(res);
-        cout << "Y= " << res << endl;
+        cout << "Y = " << res << endl;
     }
     return results_array;
 }
@@ -51,7 +51,7 @@ auto calculate_y_minus_s(double a, double b, double h, int n)
     for (int i = 0; i < res1.size(); i++)
     {
         res = abs(res2[i] - res1[i]);
-        cout << "|Y-S|= " << res << endl;
+        cout << "|Y-S| = " << res << endl;
         res3.push_back(res);
     }
     return res3;
