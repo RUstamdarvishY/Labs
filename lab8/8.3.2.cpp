@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <vector>
 
 using namespace std;
 
@@ -11,32 +12,61 @@ int factorial(int num)
         return (num * factorial(num - 1));
 }
 
-double calculate_s(double x, int k)
+auto calculate_s(double a, double b, double h, int n)
 {
-    return (pow(x, 2 * k)) / factorial(2 * k);
+    vector<double> results_array;
+    for (int k = 0; k < n; k++)
+    {
+        double res = 0;
+        for (int i = a; i <= b; i += h)
+        {
+            res += (pow(i, 2 * k)) / factorial(2 * k);
+        }
+        cout << "S= " << res << endl;
+        results_array.push_back(res);
+    }
+    return results_array;
 }
 
-double calculate_y(double x)
+auto calculate_y(double a, double b, double h)
 {
-    return (exp(x) + exp(-x)) / 2;
+    vector<double> results_array;
+    for (int i = a; i <= b; i += h)
+    {
+        double res;
+        res = (exp(i) + exp(-i)) / 2;
+        results_array.push_back(res);
+        cout << "Y= " << res << endl;
+    }
+    return results_array;
 }
 
-double calculate_y_minus_s(double x, int k)
+auto calculate_y_minus_s(double a, double b, double h, int n)
 {
-    return abs(((exp(x) + exp(-x)) / 2) - ((pow(x, 2 * k)) / factorial(2 * k)));
+    vector<double> res1 = calculate_s(a, b, h, n);
+    vector<double> res2 = calculate_y(a, b, h);
+
+    vector<double> res3;
+    double res;
+    for (int i = 0; i < res1.size(); i++)
+    {
+        res = abs(res2[i] - res1[i]);
+        cout << "|Y-S|= " << res << endl;
+        res3.push_back(res);
+    }
+    return res3;
 }
 
-double out_rez(auto func)
+auto out_rez(auto func)
 {
-        return func;
+    return func;
 }
-
 
 int main()
 {
     double a;
     double b;
-    double n;
+    int n;
     double h;
     cout << "Enter value for a: ";
     cin >> a;
@@ -48,23 +78,16 @@ int main()
     cin >> n;
 
     int option;
-    int k = 0;
 
     cout << "Choose which function to calculate: 1 for S, 2 for Y, 3 for |Y-S|: ";
     cin >> option;
 
-    while (k < n, k++)
-    {
-        for (int x = a; x < b; x += h)
-        {
-            if (option == 1)
-                cout << "S: " << out_rez(calculate_s(x, k));
-            else if (option == 2)
-                cout << "Y: " << out_rez(calculate_y(x));
-            else if (option == 3)
-                cout << "|Y-S|: " << out_rez(calculate_y_minus_s(x, k));
-        }
-    }
+    if (option == 1)
+        out_rez(calculate_s(a, b, h, n));
+    else if (option == 2)
+        out_rez(calculate_y(a, b, h));
+    else if (option == 3)
+        out_rez(calculate_y_minus_s(a, b, h, n));
 
     return 0;
 }

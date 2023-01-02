@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <vector>
 
 using namespace std;
 
@@ -11,21 +12,41 @@ int factorial(int num)
         return (num * factorial(num - 1));
 }
 
-double calculate_s(double x, int k)
+auto calculate_s(double a, double b, double h, int n)
 {
-    return (pow(x, 2 * k)) / factorial(2 * k);
+    vector<double> results_array;
+    for (int k = 0; k < n; k++)
+    {
+        double res = 0;
+        for (int i = a; i <= b; i += h)
+        {
+            res += (pow(i, 2 * k)) / factorial(2 * k);
+        }
+        cout << "S= " << res << endl;
+        results_array.push_back(res);
+    }
+    return results_array;
 }
 
-double calculate_y(double x)
+auto calculate_y(double a, double b, double h)
 {
-    return (exp(x) + exp(-x)) / 2;
+    vector<double> results_array; 
+    for (int i = a; i <= b; i += h)
+    {
+        double res;
+        res = (exp(i) + exp(-i)) / 2;
+        results_array.push_back(res);
+        cout << "Y= " << res << endl;
+    }
+    return results_array;
 }
+
 
 int main()
 {
     double a;
     double b;
-    double n;
+    int n;
     double h;
     cout << "Enter value for a: ";
     cin >> a;
@@ -36,21 +57,11 @@ int main()
     cout << "Enter value for n: ";
     cin >> n;
 
-    double s;
-    double y;
-    int k = 0;
+    vector<double> res1 = calculate_s(a, b, h, n); 
+    vector<double> res2 = calculate_y(a, b, h); 
 
-    while (k < n, k++)
-    {
-        for (int x = a; x < b; x += h)
-        {
-            s = calculate_s(x, k);
-            y = calculate_y(x);
-
-            cout << "S = " << s
-                 << "Y = " << y
-                 << "|Y-S| = " << abs(y - s) << endl;
-        }
+    for (int i = 0; i < res1.size(); i++){
+        cout << "|Y-S|= " << abs(res2[i] - res1[i]) << endl; 
     }
 
     return 0;
