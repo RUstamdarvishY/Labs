@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <random>
+#include <limits>
 
 using namespace std;
 
@@ -64,7 +65,7 @@ int main()
         {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Size of array must be a number and less than 20" << endl;
+            cout << "Size of array must be a number and less than 20, enter again" << endl;
             cin >> n;
         }
         else
@@ -77,11 +78,11 @@ int main()
     cin >> option;
     while (true)
     {
-        if (cin.fail() || !(option == 1 || option == 2))
+        if (cin.fail())
         {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Option variable must be equal to 1 or 2" << endl;
+            cout << "Option variable must be equal to 1 or 2, enter again" << endl;
             cin >> n;
         }
         else

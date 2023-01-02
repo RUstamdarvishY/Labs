@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <limits>
 
 using namespace std;
 
@@ -12,7 +13,7 @@ double calculate_a(double x, double y, double z)
     }
     if (sin(z) == 0)
     {
-        cout << "Деление на ноль" << endl;
+        cout << "Division by zero" << endl;
         exit(1);
     }
     return pow(2, -x) * (sqrt(x + pow(abs(y), 1 / 4))) * (pow(exp(x - (1 / sin(z))), 1 / 3));
