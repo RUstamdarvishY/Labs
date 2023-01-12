@@ -1,15 +1,12 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <filesystem>
 
 using namespace std;
 
-string initialize_file()
+void initialize_file(string file_name)
 {
-    string file_name;
-    cout << "Enter file name: ";
-    cin >> file_name;
-
     fstream file;
     file.open(file_name, ios::out);
 
@@ -20,7 +17,6 @@ string initialize_file()
         file << "фамилия,группа,физика,математика,информатика,средняя,\n";
         file.close();
     }
-    return file_name;
 }
 
 void read_students(string file_name)
@@ -40,6 +36,10 @@ void read_students(string file_name)
         }
         file.close();
     }
+    else
+    {
+        cout << "File does not exist" << endl;
+    }
 };
 
 void add_student(string file_name)
@@ -50,6 +50,9 @@ void add_student(string file_name)
     int math_grade;
     int informatics_grade;
     double average_grade;
+
+    if (!filesystem::exists("student.csv"))
+        initialize_file(file_name);
 
     fstream file;
     file.open(file_name, ios::app);
@@ -115,14 +118,11 @@ void get_students_with_low_grades(string file_name)
 
 int main()
 {
-
-    // initialize_file();
-
     add_student("student.csv");
     cout << "\n";
     read_students("student.csv");
     cout << "\n";
-    get_students_with_low_grades("student.csv");
+    // get_students_with_low_grades("student.csv");
 
     return 0;
 }
