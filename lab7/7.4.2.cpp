@@ -59,7 +59,7 @@ void add_student(string file_name)
 
     if (file.is_open())
     {
-        cout << "Enter student surname: ";
+        cout << "\nEnter student surname: ";
         cin >> surname;
         cout << "Enter group number: ";
         cin >> group_number;
@@ -80,7 +80,7 @@ void add_student(string file_name)
 void get_students_with_low_grades(string file_name)
 {
     fstream file;
-    file.open(file_name, ios::out);
+    file.open(file_name, ios::out | ios::in);
 
     string group_number;
     cout << "Enter group number" << endl;
@@ -88,41 +88,33 @@ void get_students_with_low_grades(string file_name)
 
     int passing_grade = 4;
 
-    vector<vector<string>> student_info;
-    if (file.is_open())
+    vector<string> student_info;
+
+    for (string line; getline(file, line, ',');)
     {
-        int j;
-        while (!file.eof())
         {
-            for (int i = 0; i < 6; i++)
-            {
-                getline(file, student_info[j][i], ',');
-                if (student_info[j].empty())
-                    continue;
-            }
-            j++;
+            student_info.push_back(line);
         }
-        file.close();
     }
-    for (int i = 0; i < student_info.size(); i++)
+
+    file.close();
+
+    for (int i = 6; i < student_info.size(); i += 6)
     {
-        if (student_info[i][1] == group_number)
+        if (student_info[i + 1] == group_number && (stoi(student_info[i + 2]) < passing_grade || stoi(student_info[i + 3]) < passing_grade || stoi(student_info[i + 4]) < passing_grade))
         {
-            if (stoi(student_info[i][2]) < passing_grade || stoi(student_info[i][3]) < passing_grade || stoi(student_info[i][4]) < passing_grade)
-            {
-                cout << "Student with low grade: " << student_info[i][0] << endl;
-            }
+            cout << "Student with low grade: " << student_info[i] << endl;
         }
     }
 };
 
 int main()
 {
-    add_student("student.csv");
+    // add_student("student.csv");
     cout << "\n";
     read_students("student.csv");
     cout << "\n";
-    // get_students_with_low_grades("student.csv");
+    get_students_with_low_grades("student.csv");
 
     return 0;
 }
